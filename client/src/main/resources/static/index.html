@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" ></script>
+    <script src="css/jquery-3.0.0.js"></script>
+    <script>
+        function own() {
+               //var shu =document.getElementById("input").value; //用js方式
+
+                var cs = $("#input").val();
+                 alert("cs的值："+cs);
+             if (cs == null || cs =="") {
+                   alert("为空");
+                    $("#1").html("id不能为空");
+                } else {
+                    //$.post("${pageContext.request.contextPath}/info",
+                        $.post("http://127.0.0.1:8080/getinfo",
+                        { "cs" : cs},
+                            function (data) {
+                            alert("成功");
+                            $("#a").html(data.codeId);
+                            $("#b").html(data.name);
+                            $("#c").html(data.type);
+                        },"json" );
+                }
+        }
+    </script>
+    </head>
+<body >
+
+<div align="center">
+请输入工号：<input  id="input" >
+<button id="in" value="提交" onclick="own()" style="height: 20px;width: 90px;">提交</button>
+    <table border="1">
+        <tr>
+            <th>工号</th><th>姓名</th><th>所在部门</th>
+        </tr>
+        <tr>
+            <td id="a"></td><td id="b"></td><td id="c"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
